@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 
 import java.util.Random;
 
+import static com.wanghaohua.mychartlinedemo.util.DensityUtil.dp2px;
+
 /**
  * Created by wanghaohua on 2020/9/8
  */
@@ -111,11 +113,6 @@ public class HistogramView extends View {
             min = Math.min(min, nums[i]);
         }
         return min;
-    }
-
-    public int dp2px(Context context, float dpVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, context.getApplicationContext().getResources().getDisplayMetrics());
     }
 
     @Override

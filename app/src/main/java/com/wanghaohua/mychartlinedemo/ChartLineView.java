@@ -19,6 +19,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.wanghaohua.mychartlinedemo.util.DensityUtil.dp2px;
+
 /**
  * Created by wanghaohua on 2020/9/1
  */
@@ -299,10 +301,5 @@ public class ChartLineView extends View {
             String text = String.valueOf(mValues[mPoints.indexOf(nearestPoint)]);
             canvas.drawText(text, nearestPoint.x + mTextMargin, nearestPoint.y, mPaint);
         }
-    }
-
-    public int dp2px(Context context, float dpVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, context.getApplicationContext().getResources().getDisplayMetrics());
     }
 }
