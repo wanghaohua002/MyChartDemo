@@ -10,7 +10,7 @@
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="500dp"/>-->
 
-    <com.wanghaohua.mychartlinedemo.ChartLineView
+    <com.wanghaohua.mychartlinedemo.LineChartView
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginLeft="100dp"/>

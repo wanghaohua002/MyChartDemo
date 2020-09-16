@@ -24,7 +24,7 @@ import static com.wanghaohua.mychartlinedemo.util.DensityUtil.dp2px;
 /**
  * Created by wanghaohua on 2020/9/1
  */
-public class ChartLineView extends View {
+public class LineChartView extends View {
 
     private int mHeight;
     private int mWidth;
@@ -75,16 +75,16 @@ public class ChartLineView extends View {
     private float mPressedX = -1;
     private Runnable mHideReticleRunnable;
 
-    public ChartLineView(Context context) {
+    public LineChartView(Context context) {
         super(context);
     }
 
-    public ChartLineView(Context context, @Nullable AttributeSet attrs) {
+    public LineChartView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ChartLineView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LineChartView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
