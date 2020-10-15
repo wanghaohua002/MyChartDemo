@@ -17,9 +17,11 @@ public class TimeTrendPaint {
     public final static int C_PRICE_BG = 0x504486CB; //阴影背景渐变起始色
     public final static int C_PRICE_ED = 0x0051A7FF; //阴影背景渐变高位色
     //红涨绿跌,平灰
-    public final static int COLOR_RED = 0xfffec1bb;
-    public final static int COLOR_GREEN = 0xffa6e1b9;
+    public final static int COLOR_RED = 0xffff0000;
+    public final static int COLOR_GREEN = 0xff00ff00;
     public final static int COLOR_DARK = 0xffd4d6da;
+
+    public final static float WIDTH_VOLUME = 2f;
 
     public Paint mOutLinePaint;
     public Paint mTextPaint;
@@ -57,17 +59,17 @@ public class TimeTrendPaint {
         mRedPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mRedPaint.setColor(COLOR_RED);
         mRedPaint.setStyle(Paint.Style.STROKE);
-        mRedPaint.setStrokeWidth(5f);
+        mRedPaint.setStrokeWidth(WIDTH_VOLUME);
 
         mGreenPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mGreenPaint.setColor(COLOR_GREEN);
         mGreenPaint.setStyle(Paint.Style.STROKE);
-        mGreenPaint.setStrokeWidth(5f);
+        mGreenPaint.setStrokeWidth(WIDTH_VOLUME);
 
         mDarkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mDarkPaint.setColor(COLOR_DARK);
         mDarkPaint.setStyle(Paint.Style.STROKE);
-        mDarkPaint.setStrokeWidth(5f);
+        mDarkPaint.setStrokeWidth(WIDTH_VOLUME);
     }
 
 

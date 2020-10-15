@@ -18,7 +18,6 @@ import com.wanghaohua.mychartlinedemo.timetrend.TimeTrendModel;
 import com.wanghaohua.mychartlinedemo.timetrend.TimeTrendPaint;
 import com.wanghaohua.mychartlinedemo.timetrend.TimeTrendTag;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.wanghaohua.mychartlinedemo.util.DensityUtil.dp2px;
@@ -28,6 +27,7 @@ import static com.wanghaohua.mychartlinedemo.util.DensityUtil.dp2px;
  */
 public class TimeTrendChartView extends View {
 
+    private static final int COLUMN_EACH_DAY = 314;
     //分时图区域
     private Rect mTrendFrame = new Rect();
     //文字区域
@@ -90,7 +90,7 @@ public class TimeTrendChartView extends View {
                 mPadding + trendHeight + textHeight);
         mVolumeFrame.set(mPadding, mPadding + trendHeight + textHeight, w - mPadding, h - mPadding);
 
-        mXPhaseWidth = ((float) (w - 2 * mPadding)) / (mData.size() - 1);
+        mXPhaseWidth = ((float) (w - 2 * mPadding - TimeTrendPaint.WIDTH_VOLUME)) / (COLUMN_EACH_DAY - 1);
     }
 
     @Override
@@ -98,6 +98,7 @@ public class TimeTrendChartView extends View {
         initDrawData();
         drawTimeTrend(canvas);
         drawText(canvas);
+        drawVolume(canvas);
     }
 
     private void initDrawData() {
@@ -144,7 +145,7 @@ public class TimeTrendChartView extends View {
         float lastX = mTrendFrame.left;
         for (int i = 0; i < mData.size(); i++) {
             TimeTrendModel model = mData.get(i);
-            float currentX = mTrendFrame.left + i * mXPhaseWidth;
+            float currentX = mTrendFrame.left + i * mXPhaseWidth + TimeTrendPaint.WIDTH_VOLUME / 2;
             float currentY =
                     mTrendFrame.bottom - (Float.parseFloat(model.getPrice()) - mMinPrice) / diffPrice * mTrendFrame.height();
             if (i == 0) {
@@ -189,6 +190,29 @@ public class TimeTrendChartView extends View {
         mPaints.mTextPaint.setTextAlign(Paint.Align.RIGHT);
         canvas.drawText(mTimeTag.endTime, mTextFrame.right - textMargin,
                 mTextFrame.top + textMargin + mRect.height(), mPaints.mTextPaint);
+    }
+
+    private void drawVolume(Canvas canvas) {
+        canvas.drawRect(mVolumeFrame, mPaints.mOutLinePaint);
+        for (int i = 0; i < mData.size(); i++) {
+            Paint paint = null;
+            TimeTrendModel model = mData.get(i);
+            float currentX = mVolumeFrame.left + i * mXPhaseWidth + TimeTrendPaint.WIDTH_VOLUME / 2;
+            float currentY = mVolumeFrame.bottom - Float.parseFloat(model.getVolume()) / mMaxVolume * mVolumeFrame.height();
+            switch (model.state) {
+                case TimeTrendModel.STATE_FALL:
+                    paint = mPaints.mGreenPaint;
+                    break;
+                case TimeTrendModel.STATE_RISE:
+                    paint = mPaints.mRedPaint;
+                    break;
+                case TimeTrendModel.STATE_FLAT:
+                default:
+                    paint = mPaints.mDarkPaint;
+                    break;
+            }
+            canvas.drawLine(currentX, mVolumeFrame.bottom, currentX, currentY, paint);
+        }
     }
 
 
